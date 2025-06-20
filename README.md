@@ -55,7 +55,7 @@ npm install prompt-sync
 3. Rode o sistema no terminal:
 
 ```bash
-node index.js
+node app.js
 ```
 
 > *(Lembrando: `app.js` é o arquivo onde está o menu principal)*
@@ -64,7 +64,7 @@ node index.js
 
 ## 🛠️ Organização dos Arquivos
 
-- **index.js** → Onde fica o menu principal e o loop interativo.  
+- **app.js** → Onde fica o menu principal e o loop interativo.  
 - **funcoes.js** → Onde estão todas as funções que controlam as vendas, listagem, cálculo de médias, etc.
 
 ---
@@ -91,8 +91,8 @@ node index.js
 
 ## 👨‍🏫 Agradecimento Especial
 
-Agradeço ao **Professor Bruno** pelas aulas e pela proposta desse projeto!  
-Essa atividade foi uma ótima oportunidade de praticar tudo o que aprendemos até agora.
+Agradeço ao **Professor Bruno** pelas aulas e pela proposta desse projeto,
+Essa atividade foi uma oportunidade de praticar tudo o que aprendemos até agora.
 
 ---
 
