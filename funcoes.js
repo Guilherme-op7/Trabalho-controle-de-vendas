@@ -1,18 +1,18 @@
-// Importando o prompt-sync pra entrada dos dados pelo terminal
+// Importando o prompt-sync pra digitar pelo terminal
 import prompt from 'prompt-sync';
 let ler = prompt();
 
 // Lista de produtos da loja
 export let produtos = [
     {id : 1 , nome: 'Pocao de vida', preco: 100},
-    {id : 2 , nome: 'Pocao de inteligência', preco: 159},
+    {id : 2 , nome: 'Pocao de inteligencia', preco: 159},
     {id : 3 , nome: 'Espada magica', preco: 500},
-    {id : 4 , nome: 'Escudo do Dragao', preco: 300},
+    {id : 4 , nome: 'Escudo do dragao', preco: 300},
     {id : 5 , nome: 'Anel da sorte', preco: 600},
     {id : 6 , nome: 'Capa da invisibilidade do Harry Potter', preco: 1000}
 ]
 
-// Lista de vendas feitas, começa com algumas
+// Vendas que ja foram feitas
 export let vendas = [
     {id: 1, cliente: 'Guilherme', produto: 'Pocao de vida', valor: 100, data: '2025-06-10'},
     {id: 2, cliente: 'Bruno', produto: 'Espada magica', valor: 5050, data: '2025-06-11'},
@@ -24,8 +24,8 @@ export let vendas = [
     {id: 8, cliente: 'Gabriel', produto: 'Pocao de inteligencia', valor: 150, data: '2025-06-02'}
 ];
 
-// Função para listar os produtos da loja
-export async function listarprodutos() {
+// Mostra os produtos pro cliente escolher
+export async function produtos() {
     console.log('\n 🛒 Produtos disponiveis na loja magica✨');
     for(let item of produtos) {
         await sleep(500);
@@ -34,29 +34,29 @@ export async function listarprodutos() {
     console.log('')
 }
 
-// função para registrar uma nova venda
-export async function registraravenda() {
+// Registra uma nova venda
+export async function vender() {
     console.log('🧾 REGISTRAR NOVA VENDA 🧾');
     await sleep(500);
     console.log('📝 Nome do cliente magico: ');
     let cliente = ler();
 
-    await listarprodutos(); // Exibe os produtos para o cliente escolher
+    await produtos(); // Exibe os produtos para o cliente escolher
 
     console.log('Escolha o ID do produto: ');
     let idProduto = Number(ler());
 
-    let produtoselecionado = null;
+    let achou = null;
 
     //procura pelo o id o produto
     for(let i = 0; i < produtos.length; i++) {
         if(produtos[i].id === idProduto) {
-            produtoselecionado = produtos[i];
+            achou = produtos[i];
 
         }
     }
     // se ele nao existir
-        if(produtoselecionado === null) {
+        if(achou === null) {
             console.log('❌ Produto não encontrado! Venda cancelada. \n');
             return;
 
@@ -67,16 +67,16 @@ export async function registraravenda() {
         console.log('Data venda: 📆');
         let data = ler();
 
-        // cria o objeto de uma nova venda
+        // cria o objeto de nova venda
         let venda = {
             id: vendas.length + 1,
             cliente: cliente,
-            produto: produtoselecionado.nome,
-            valor: produtoselecionado.preco,
+            produto: achou.nome,
+            valor: achou.preco,
             data: data
         };
-        // adiciona a venda no [arrays]
-        vendas[vendas.length] = venda;
+        
+        vendas.push(venda)
 
         await sleep(500);
 
@@ -94,7 +94,7 @@ export async function cancelarvenda() {
     let id = Number(ler());
 
     let nova = [];  // array pra guardar as que nao serao canceladas
-    let encontrou = false; // pra saber se encontrou a venda
+    let achou = false; // pra saber se encontrou a venda
 
     for (let i = 0; i < vendas.length; i++) {
 
@@ -103,7 +103,7 @@ export async function cancelarvenda() {
         }
 
         else {
-            encontrou = true
+            achou = true
         }
         
     }
@@ -115,7 +115,7 @@ export async function cancelarvenda() {
         }
 
         // mensagem de sucesso ou erro
-        if (encontrou) {
+        if (achou) {
             console.log('✅ Venda cancelada com sucesso!\n')
         }
 
@@ -126,24 +126,24 @@ export async function cancelarvenda() {
 }
 
 // função para listar vendas de um dia especifico
-export async function listarvendasdodia() {
+export async function vendasdodia() {
     console.log('🗒️ LISTAR VENDAS DO DIA ');
     await sleep(500);
 
     console.log('informe a data: ');
     let dia = ler();
     let total = 0;
-    let encontrou = false;
+    let achou = false;
 
     for(let i = 0; i < vendas.length; i++) {
         if(vendas[i].data === dia){
             console.log('ID: ' + vendas[i].id + ' | Cliente: ' + vendas[i].cliente + ' | Produto: ' + vendas[i].produto + '| Valor: ' + vendas[i].valor);
             total += vendas[i].valor
-            encontrou = true;
+            achou = true;
         }
     }
 
-    if(encontrou) {
+    if(achou) {
         console.log(`Total vendido no dia: ${total} moedas magicas🔥\n`);
     }
     else {
@@ -152,7 +152,7 @@ export async function listarvendasdodia() {
 } 
 
 // função pra listar vendas em um periodo
-export async function listarvendasporperiodo() {
+export async function vendasdoperiodo() {
     await sleep(500);
     console.log(' LISTAR VENDAS POR PERIODO ');
     await sleep(500);
@@ -168,17 +168,17 @@ export async function listarvendasporperiodo() {
     }
 
     let total = 0;
-    let encontrou = false;
+    let achou = false;
 
     for (let i = 0; i < vendas.length; i++) {
         if(vendas[i].data >= inicio && vendas[i].data <= fim) {
             console.log(`ID: ${vendas[i].id} | Cliente: ${vendas[i].cliente} | Produto: ${vendas[i].produto} | Valor: ${vendas[i].valor} | Data: ${vendas[i].data}`);
             total += vendas[i].valor;
-            encontrou = true;
+            achou = true;
         }
 
     }
-    if (encontrou) {
+    if (achou) {
         console.log(`🔍 Total de vendas nesse periodo: ${total} moedas mágicas🔥`)
     }
 
@@ -189,37 +189,37 @@ export async function listarvendasporperiodo() {
 
 
 // buscar as vendas de um cliente especifico
-export async function buscarporcliente() {
+export async function acharcliente() {
     console.log('🔍 BUSCAR VENDAS POR CLIENTE ') 
     await sleep(500);
     console.log('Digite o nome do cliente: ');
     let nome = ler().toLowerCase();
 
-    let encontrou = false;
+    let achou = false;
 
     for(let i = 0; i < vendas.length; i++) {
 
         if(vendas[i].cliente.toLowerCase() === nome) {
             console.log(`ID: ${vendas[i].id} | Produto: ${vendas[i].produto} | Valor: ${vendas[i].valor} | Data: ${vendas[i].data}`);
-            encontrou = true;
+            achou = true;
         }
 
     }
 
-    if(!encontrou) {
+    if(!achou) {
         console.log('❌ Nenhuma venda encontrada para esse cliente!')
     }
     
 }
 
 // função que acha o produto mais vendido ate o momento
-export async function produtomaisvendido() {
+export async function maisvendido() {
     await sleep(500);
     console.log('💰 PRODUTO MAIS VENDIDO 💰');
 
     let contagem = {}; // objeto para contar quantas vezes cada produto foi vendido
-    let maisvendidos = '';
-    let maiorquantidade = 0;
+    let topvendas = '';
+    let qtdmaior = 0;
 
     for(let i = 0; i < vendas.length; i++) {
 
@@ -238,15 +238,15 @@ export async function produtomaisvendido() {
     /// descobre qual produto teve mais vendas
     for (let produtoo in contagem) {
 
-        if (contagem[produtoo] > maiorquantidade) {
-            maiorquantidade = contagem[produtoo];
-            maisvendidos = produtoo;
+        if (contagem[produtoo] > qtdmaior) {
+            qtdmaior = contagem[produtoo];
+            topvendas = produtoo;
         }
 
     }
 
-    if (maiorquantidade > 0) {
-        console.log(`O produto mais vendido ate agora foi ${maisvendidos}, (${maiorquantidade}) vendas💰`)
+    if (qtdmaior > 0) {
+        console.log(`O produto mais vendido ate agora foi ${topvendas}, (${qtdmaior}) vendas💰`)
     }
 
     else {
@@ -256,7 +256,7 @@ export async function produtomaisvendido() {
 }
 
 // função para calcular o valor medio das vendas feitas
-export async function valormediodevendas() {
+export async function mediavendas() {
     await sleep(500);
     console.log('📈 VALOR MEDIO DE VENDAS 📈');
     let total = 0;
@@ -277,7 +277,7 @@ export async function valormediodevendas() {
 }
 
 // funções para listar as vendas de um produto especifico
-export async function vendasporprodutosespecifico() {
+export async function porprodutos() {
     console.log('🗒️ LISTAR VENDAS POR PRODUTOS 🗒️');
     await sleep(500);
     console.log('Digite o nome do produto: ');
@@ -293,7 +293,6 @@ export async function vendasporprodutosespecifico() {
         total += vendas[i].valor;
         
         encontrou = true;
-        total++
 
         }
     }
@@ -308,7 +307,7 @@ export async function vendasporprodutosespecifico() {
 }
 
 // função que mostra o total de vendas ate o momento
-export async function vendastotal() {
+export async function total() {
     console.log('QUANTIDADE TOTAL DE VENDAS 🔱');
     await sleep(1000);
     console.log(`numero total de vendas realizadas: ${vendas.length}.`);

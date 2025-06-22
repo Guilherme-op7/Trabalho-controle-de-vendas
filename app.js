@@ -1,9 +1,10 @@
-// Importando o prompt-sync pra entrada dos dados pelo terminal
+// Importando o prompt-sync pra digitar pelo terminal
 import prompt from 'prompt-sync';
 let ler = prompt();
 
 // importando todas as funções que foram feitas no outro arquivo chamado funcoes.js
-import { buscarporcliente, cancelarvenda, listarprodutos, listarvendasdodia, listarvendasporperiodo, produtomaisvendido, registraravenda, valormediodevendas, vendasporprodutosespecifico, vendastotal } from './funcoes.js';
+import { acharcliente, cancelarvenda, maisvendido, mediavendas, porprodutos, produtos, total, vendasdodia, vendasdoperiodo, vender } from './funcoes.js';
+
 
 // função principal que tem o menu interativo
 async function  menu() { 
@@ -46,11 +47,11 @@ async function  menu() {
 
         // verifica qual opção o usuario escolheu e chama a função
         if(opcao === 1) {
-           await listarprodutos();
+           await produtos();
         }
 
         else if(opcao === 2) {
-          await  registraravenda();
+          await  vender();
         }
 
         else if(opcao === 3) {
@@ -58,31 +59,31 @@ async function  menu() {
         }
 
         else if(opcao === 4) {
-          await  listarvendasdodia();
+          await  vendasdodia();
         }
 
         else if(opcao === 5) {
-          await  listarvendasporperiodo();
+          await  vendasdoperiodo();
         }
 
         else if(opcao === 6) {
-          await  buscarporcliente();
+          await  acharcliente();
         }
 
         else if(opcao === 7) {
-          await  produtomaisvendido();
+          await  maisvendido();
         }
 
         else if(opcao === 8) {
-          await  valormediodevendas();
+          await  mediavendas();
         }
 
         else if(opcao === 9) {
-          await  vendasporprodutosespecifico();
+          await  porprodutos();
         }
 
         else if(opcao === 10) {
-          await  vendastotal();
+          await  total();
         }
 
         else if(opcao === 0) {
