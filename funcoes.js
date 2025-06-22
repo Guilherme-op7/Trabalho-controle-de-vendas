@@ -130,7 +130,7 @@ export async function listarvendasdodia() {
     console.log('🗒️ LISTAR VENDAS DO DIA ');
     await sleep(500);
 
-    console.log('informe a data: (YYY-MM-DD): ');
+    console.log('informe a data: ');
     let dia = ler();
     let total = 0;
     let encontrou = false;
