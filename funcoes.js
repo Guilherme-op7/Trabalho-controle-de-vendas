@@ -64,7 +64,7 @@ export async function registraravenda() {
 
         await sleep(500);
 
-        console.log('Data venda (YYYY-MM-DD): 📆');
+        console.log('Data venda: 📆');
         let data = ler();
 
         // cria o objeto de uma nova venda
@@ -154,12 +154,12 @@ export async function listarvendasdodia() {
 // função pra listar vendas em um periodo
 export async function listarvendasporperiodo() {
     await sleep(500);
-    console.log('# LISTAR VENDAS POR PERIODO #');
+    console.log(' LISTAR VENDAS POR PERIODO ');
     await sleep(500);
-    console.log('Digite a data inicial: (YYYY-MM-DD): ');
+    console.log('Digite a data inicial: ');
     let inicio = ler();
     await sleep(500);
-    console.log('Digite a data final (YYYY-MM-DD): ')
+    console.log('Digite a data final: ')
     let fim = ler();
 
     if(inicio > fim) {
