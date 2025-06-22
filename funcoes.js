@@ -64,7 +64,7 @@ export async function registraravenda() {
 
         await sleep(500);
 
-        console.log('Data venda (YYYY-MM-DD): 📆');
+        console.log('Data venda: 📆');
         let data = ler();
 
         // cria o objeto de uma nova venda
